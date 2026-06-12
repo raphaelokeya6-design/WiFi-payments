@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-wifi"></i> WiFi Admin Panel
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Container -->
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" onclick="showSection('dashboard')" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#" onclick="showSection('transactions')"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                <li><a href="#" onclick="showSection('users')"><i class="fas fa-users"></i> Users</a></li>
+                <li><a href="#" onclick="showSection('wifi-networks')"><i class="fas fa-wifi"></i> WiFi Networks</a></li>
+                <li><a href="#" onclick="showSection('reports')"><i class="fas fa-file-chart-line"></i> Reports</a></li>
+                <li><a href="#" onclick="showSection('settings')"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="section active">
+                <h1>Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Total Revenue</h3>
+                        <p class="stat-value">$12,450.50</p>
+                        <small>+12% from last month</small>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Active Users</h3>
+                        <p class="stat-value">2,847</p>
+                        <small>+5% from last month</small>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-wifi"></i>
+                        <h3>Active Subscriptions</h3>
+                        <p class="stat-value">1,543</p>
+                        <small>-2% from last month</small>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Transactions Today</h3>
+                        <p class="stat-value">156</p>
+                        <small>Success rate: 98.7%</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Section -->
+            <div id="transactions" class="section">
+                <h2>Recent Transactions</h2>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User</th>
+                            <th>Package</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#TXN001</td>
+                            <td>John Doe</td>
+                            <td>7 Day Pass</td>
+                            <td>$19.99</td>
+                            <td>June 12, 2026</td>
+                            <td><span class="status-success">Completed</span></td>
+                            <td><a href="#">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>#TXN002</td>
+                            <td>Jane Smith</td>
+                            <td>1 Day Pass</td>
+                            <td>$7.99</td>
+                            <td>June 12, 2026</td>
+                            <td><span class="status-success">Completed</span></td>
+                            <td><a href="#">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Users Section -->
+            <div id="users" class="section">
+                <h2>User Management</h2>
+                <button class="btn btn-primary" onclick="addNewUser()">+ Add User</button>
+                <table class="history-table" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Country</th>
+                            <th>Subscriptions</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#USR001</td>
+                            <td>John Doe</td>
+                            <td>john@example.com</td>
+                            <td>United States</td>
+                            <td>2</td>
+                            <td><span class="status-success">Active</span></td>
+                            <td><a href="#">Edit</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- WiFi Networks Section -->
+            <div id="wifi-networks" class="section">
+                <h2>WiFi Networks</h2>
+                <button class="btn btn-primary" onclick="addWiFiNetwork()">+ Add Network</button>
+                <div class="networks-grid" style="margin-top: 20px;">
+                    <div class="network-card" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h3>Network NYC-01</h3>
+                        <p><strong>City:</strong> New York</p>
+                        <p><strong>Status:</strong> <span style="color: green;">Online</span></p>
+                        <p><strong>Users Connected:</strong> 245</p>
+                        <button class="btn btn-sm btn-secondary">Manage</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="section">
+                <h2>Reports</h2>
+                <div class="report-options">
+                    <button class="btn btn-primary" onclick="generateReport('revenue')">Generate Revenue Report</button>
+                    <button class="btn btn-primary" onclick="generateReport('users')">Generate User Report</button>
+                    <button class="btn btn-primary" onclick="generateReport('transactions')">Generate Transaction Report</button>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="section">
+                <h2>Admin Settings</h2>
+                <form class="profile-form">
+                    <div class="form-section">
+                        <h3>Platform Settings</h3>
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                            Allow user registrations
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked>
+                            Enable email notifications
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Settings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        function addNewUser() {
+            alert('Add new user modal would open here');
+        }
+        
+        function addWiFiNetwork() {
+            alert('Add WiFi network modal would open here');
+        }
+        
+        function generateReport(type) {
+            alert('Generating ' + type + ' report...');
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
